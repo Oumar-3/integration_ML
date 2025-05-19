@@ -1,8 +1,7 @@
 from django.urls import path
-from .views import prediction, PredictBudget, chatbot_view
+from .views import index, PredictBudget
 
 urlpatterns = [
-    path('prediction/',prediction, name='prediction'),
-    path('chatbot/', chatbot_view, name='chatbot'),
+    path('index/', index, name='index'),
     path('predict/', PredictBudget.as_view(), name='predict'),
 ]
