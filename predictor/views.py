@@ -8,12 +8,15 @@ import os
 from .serializers import PredictionInputSerializer
 
 # Charger la liste des communes disponibles
-with open('models/communes.txt', 'r', encoding='utf-8') as f:
+with open('models/communes.txt', 'r') as f:
     AVAILABLE_COMMUNES = f.read().splitlines()
 
-def index(request):
+def prediction(request):
     # Passer la liste des communes au template
-    return render(request, 'predictor/index.html', {'communes': AVAILABLE_COMMUNES})
+    return render(request, 'predictor/prediction.html', {'communes': AVAILABLE_COMMUNES})
+
+def chatbot_view(request):
+    return render(request, 'predictor/chatbot.html', {'communes': AVAILABLE_COMMUNES})
 
 class PredictBudget(APIView):
     def post(self, request):
@@ -59,3 +62,4 @@ class PredictBudget(APIView):
                 "error": "Erreur lors de la prédiction",
                 "details": str(e)
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
